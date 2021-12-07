@@ -1,9 +1,16 @@
 # figma-contentful-blog
 
 This project shows how to use Figma and ContentFul.com to build a blog, using the Luisa Low-Code framework. 
-The Figma design was extended with The Figma-Low-Code plugin to wire certain elements to the content full elements.
 
-The Home.vue file contains all the code.
+
+## How does it work
+
+- The blog was designed in Figma and extended with The Figma-Low-Code plugin to wire certain the text elements to the blog data.
+- The design is loaded through the Figma API and rendered by the <luisa> component.
+- The blog entries are loaded from Contentful.com
+- In the Home.vue, the Contentful data is mapped to the viewModel that is passed into the <luisa> component.
+
+The Home.vue file contains all the code. Please note that there is not much front-end code. The entire HTML and CSS is created behind he scenes.
 
 
 ```vue
@@ -79,6 +86,13 @@ export default {
 </script>
 
 ```
+
+
+## Documentation
+
+You can find the full Luisa documentation at [Luisa.cloud](https://luisa.cloud/help.html).
+
+
 
 ## Project setup
 ```
