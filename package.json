@@ -1,6 +1,6 @@
 {
-  "name": "luisa-vue3-starter",
-  "version": "0.1.0",
+  "name": "figma-contentful-blog",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,8 +10,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.8.0",
+    "contentful": "^9.1.5",
     "core-js": "^3.6.5",
-    "luisa-vue": "^3.0.4",
+    "luisa-vue": "^3.0.7",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"
   },

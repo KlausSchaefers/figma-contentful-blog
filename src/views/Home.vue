@@ -7,12 +7,8 @@
  * node download.js.
  */
 import app from './app.json'
-
-/**
- * Import mdi fonts if you are using quant-ux designs
- */
-//import '@mdi/font/css/materialdesignicons.css'
-
+import * as contentful from 'contentful';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 export default {
   name: 'Home',
@@ -20,8 +16,19 @@ export default {
     return {
       design: app,
       viewModel: {
-        name:'',
-        result: ''
+        selected: {},
+        blog: [
+          {
+            id: 1,
+            body: {
+              type: 'richtext',
+              value: '<b>This is bold text</b>'
+            },
+            header: '',
+            summary: 'This is the first blog',
+            title: 'First'
+          }
+        ]
       },
       config: {
       }
@@ -30,9 +37,33 @@ export default {
   components: {
   },
   methods: {
-    sayHello () {
-      this.viewModel.result = "Hello " + this.viewModel.name
+    loadBlogArticle () {
+
+    },
+    async loadContentFul () {
+      let entries = await this.client.getEntries()
+      this.viewModel.blog = entries.items.map(item => {
+        let fields = item.fields
+          return {
+            id: item.sys.id,
+            body: {
+              type: 'richtext',
+              value: documentToHtmlString(fields.body)
+            },
+            header: 'https:'+ fields.header?.fields?.file?.url,
+            summary: fields.summary,
+            title: fields.title
+          }
+      })
     }
+  },
+  mounted () {
+    this.client = contentful.createClient({
+        space: '',
+        environment: 'master', // defaults to 'master' if not set
+        accessToken: '',
+    })
+    this.loadContentFul()
   }
 }
 </script>
